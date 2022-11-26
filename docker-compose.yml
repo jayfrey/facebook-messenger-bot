@@ -1,0 +1,41 @@
+version: '3.7'
+
+services:
+  api:
+    build:
+      context: ./api
+    volumes:
+      - ./api:/app
+      - /app/node_modules
+    ports:
+      - 3000:3000
+    depends_on:
+      - db
+    command: [ "yarn", "start:dev" ]
+
+  ngrok:
+    image: ngrok/ngrok
+    environment:
+      - NGROK_AUTHTOKEN=2I2K4Bbqp1aRhHD8D2ItP80dEGX_NUzkfPHZyGtAJtHPKJvJ
+    ports:
+      - 4040:4040
+    depends_on:
+      - api
+    command: [ "http", "api:3000", ]
+
+  db:
+    image: mysql:8
+    environment:
+      MYSQL_DATABASE: db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - 3306:3306
+    expose:
+      - 3306
+    volumes:
+      - mysql_db:/var/lib/mysql
+
+volumes:
+  mysql_db:
