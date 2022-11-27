@@ -7,6 +7,6 @@ COPY yarn.lock .
 RUN yarn install
 # Copy app files
 COPY . .
-RUN yarn build
+# RUN yarn build
 # Expose port
 EXPOSE 3000
