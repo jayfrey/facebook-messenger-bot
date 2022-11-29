@@ -33,6 +33,7 @@ const fbConfig = {
   pageAccesToken: process.env.PAGE_ACCESS_TOKEN,
   appSecret: process.env.APP_SECRET,
   verifyToken: process.env.VERIFY_TOKEN,
+  userAccessToken: process.env.USER_ACCESS_TOKEN,
 
   // URL of your app domain
   appUrl: process.env.APP_URL,
