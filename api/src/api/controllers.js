@@ -1,10 +1,10 @@
 const db = require("../models/index");
 const fbConfig = require("../configs/fb");
 
-const RequestSendAPI = require("../services/request_send_api");
+const RequestSendAPI = require("../services/request-send-api");
 const Response = require("../services/response");
-const GraphApi = require("../services/graph_api");
-const MessengeHandler = require("../services/messenge_handler");
+const GraphApi = require("../services/graph-api");
+const MessengeHandler = require("../services/messenge-handler");
 
 const controllers = {
   index(req, res) {
@@ -17,7 +17,7 @@ const controllers = {
         console.error("Unable to connect to the database: ", error);
       });
 
-    console.log(fbConfig.apiDomain);
+    fbConfig.checkEnvVariables();
     res.send("Hello World " + fbConfig.appId);
   },
 

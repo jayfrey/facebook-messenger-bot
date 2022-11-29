@@ -22,7 +22,7 @@ module.exports = {
       "utf8"
     );
     products = JSON.parse(products.toString());
-    Object.keys(products).forEach(function (key) {
+    Object.keys(products).forEach((key) => {
       products[key].category = JSON.stringify(products[key].category);
       let shipping = products[key].shipping;
       if (typeof shipping === "string" || shipping instanceof String) {

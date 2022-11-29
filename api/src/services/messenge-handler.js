@@ -1,13 +1,13 @@
 const db = require("../models/index");
-const GraphApi = require("./graph_api");
-const RequestSendAPI = require("./request_send_api");
+const GraphApi = require("./graph-api");
+const RequestSendAPI = require("./request-send-api");
 const Response = require("./response");
 const Mailer = require("./mailer");
 const mailgunConfig = require("../configs/mailgun");
 const {
   productAttributesMapping,
-} = require("../enums/product_attributes_mapping");
-const { greetingMessages } = require("../constants/greeting_messenges");
+} = require("../enums/product-attributes-mapping");
+const { greetingMessages } = require("../constants/greeting-messenges");
 
 module.exports = class MessengeHandler {
   constructor(user) {
