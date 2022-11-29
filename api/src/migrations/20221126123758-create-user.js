@@ -15,9 +15,9 @@ module.exports = {
       lastName: {
         type: Sequelize.STRING,
       },
-      // profilePic: {
-      //   type: Sequelize.STRING,
-      // },
+      name: {
+        type: Sequelize.STRING,
+      },
       psid: {
         type: Sequelize.STRING,
         unique: true,

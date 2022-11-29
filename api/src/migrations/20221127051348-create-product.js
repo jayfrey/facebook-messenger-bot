@@ -26,14 +26,6 @@ module.exports = {
       },
       category: {
         type: Sequelize.TEXT("long"),
-        get() {
-          console.log(this.getDataValue("category"));
-          return JSON.parse(this.getDataValue("category").toString());
-        },
-        set(value) {
-          console.log(JSON.stringify(value));
-          this.setDataValue("category", JSON.stringify(value));
-        },
       },
       shipping: {
         type: Sequelize.FLOAT,
