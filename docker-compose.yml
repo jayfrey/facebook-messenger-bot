@@ -20,7 +20,7 @@ services:
   ngrok:
     image: ngrok/ngrok
     environment:
-      - NGROK_AUTHTOKEN=2I2K4Bbqp1aRhHD8D2ItP80dEGX_NUzkfPHZyGtAJtHPKJvJ
+      - NGROK_AUTHTOKEN=
     ports:
       - 4040:4040
     depends_on:
