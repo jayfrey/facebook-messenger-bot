@@ -8,17 +8,7 @@ const MessengeHandler = require("../services/messenge-handler");
 
 const controllers = {
   index(req, res) {
-    db.sequelize
-      .authenticate()
-      .then(() => {
-        console.log("Connection has been established successfully.");
-      })
-      .catch((error) => {
-        console.error("Unable to connect to the database: ", error);
-      });
-
-    fbConfig.checkEnvVariables();
-    res.send("Hello World " + fbConfig.appId);
+    res.status(200).send("");
   },
 
   verify_webhook(req, res) {

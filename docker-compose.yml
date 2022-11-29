@@ -10,9 +10,12 @@ services:
     depends_on:
       db:
         condition: service_healthy
-    command: >
-      sh -c "yarn sequelize-cli db:migrate &&
-             yarn start:dev"
+    command: ["yarn", "start:dev"]
+    healthcheck:
+      test: ["CMD", "node","healthcheck.js"]
+      interval: 10s
+      timeout: 20s
+      retries: 5
 
   ngrok:
     image: ngrok/ngrok
@@ -21,8 +24,15 @@ services:
     ports:
       - 4040:4040
     depends_on:
-      - api
-    command: [ "http", "api:3000", ]
+      # - api
+      api:
+        condition: service_healthy
+    command: [ "http", "api:3000" ]
+    healthcheck:
+      test: /bin/bash -c "</dev/tcp/ngrok/4040"
+      interval: 10s
+      timeout: 20s
+      retries: 5
 
   db:
     image: mysql:8
@@ -39,6 +49,7 @@ services:
       - mysql_db:/var/lib/mysql
     healthcheck:
       test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost","-u","user","-ppassword"]
+      interval: 10s
       timeout: 20s
       retries: 5
 
