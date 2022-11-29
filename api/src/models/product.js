@@ -18,7 +18,15 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       price: DataTypes.FLOAT,
       upc: DataTypes.STRING,
-      category: DataTypes.STRING,
+      category: {
+        type: DataTypes.TEXT("long"),
+        get() {
+          return JSON.parse(this.getDataValue("category").toString());
+        },
+        set(value) {
+          this.setDataValue("category", JSON.stringify(value));
+        },
+      },
       shipping: DataTypes.FLOAT,
       description: DataTypes.STRING,
       manufacturer: DataTypes.STRING,
