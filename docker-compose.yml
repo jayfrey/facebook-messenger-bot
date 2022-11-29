@@ -7,10 +7,12 @@ services:
     volumes:
       - ./api:/app
       - /app/node_modules
-    
     depends_on:
-      - db
-    command: [ "yarn", "start:dev" ]
+      db:
+        condition: service_healthy
+    command: >
+      sh -c "yarn sequelize-cli db:migrate &&
+             yarn start:dev"
 
   ngrok:
     image: ngrok/ngrok
@@ -35,6 +37,10 @@ services:
       - 3306
     volumes:
       - mysql_db:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost","-u","user","-ppassword"]
+      timeout: 20s
+      retries: 5
 
 volumes:
   mysql_db:
