@@ -4,7 +4,7 @@ const fbConfig = require("../configs/fb");
 const RequestSendAPI = require("../services/request-send-api");
 const Response = require("../services/response");
 const GraphApi = require("../services/graph-api");
-const MessengeHandler = require("../services/messenge-handler");
+const MessageHandler = require("../services/message-handler");
 
 const controllers = {
   index(req, res) {
@@ -57,15 +57,15 @@ const controllers = {
               const userProfile = await GraphApi.getUserProfile(senderPSID);
               if (userProfile) {
                 const sender = await db.User.create(userProfile);
-                const messengeHandler = new MessengeHandler(sender);
+                const messageHandler = new MessageHandler(sender);
 
-                // Send a greeting messenge
-                messengeHandler.sendGreetingMessenge();
+                // Send a greeting message
+                messageHandler.sendGreetingMessage();
               } else {
                 console.log("User Profile is null, skip creating user");
               }
             } else {
-              const messengeHandler = new MessengeHandler(sender);
+              const messageHandler = new MessageHandler(sender);
               const event = webhookEvent;
 
               try {
@@ -87,10 +87,10 @@ const controllers = {
 
                       if (query == "buy") {
                         // Notify page email to process order
-                        messengeHandler.notifyProcessOrder(productId);
+                        messageHandler.notifyProcessOrder(productId);
                       } else {
                         // Respond to user query
-                        messengeHandler.resolveQueryProduct(query, productId);
+                        messageHandler.resolveQueryProduct(query, productId);
                       }
                     }
                   }

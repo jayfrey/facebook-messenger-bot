@@ -7,7 +7,7 @@ const mailgunConfig = require("../configs/mailgun");
 const {
   productAttributesMapping,
 } = require("../enums/product-attributes-mapping");
-const { greetingMessages } = require("../constants/greeting-messenges");
+const { greetingMessages } = require("../constants/greeting-messages");
 
 module.exports = class MessengeHandler {
   constructor(user) {
@@ -76,7 +76,7 @@ module.exports = class MessengeHandler {
     }
   }
 
-  sendGreetingMessenge() {
+  sendGreetingMessage() {
     const greetingMessage =
       greetingMessages[Math.floor(Math.random() * greetingMessages.length)];
 

@@ -24,12 +24,11 @@ services:
     ports:
       - 4040:4040
     depends_on:
-      # - api
       api:
         condition: service_healthy
     command: [ "http", "api:3000" ]
     healthcheck:
-      test: /bin/bash -c "</dev/tcp/ngrok/4040"
+      test: ["CMD", "/bin/bash", "-c", "</dev/tcp/ngrok/4040"]
       interval: 10s
       timeout: 20s
       retries: 5
