@@ -51,7 +51,7 @@ Click [here](http://localhost:4040/) to open the application and you will be pre
 Copy the hosted url and add the /webhook path as your callback url for webhook, for instance, https://70c2-175-141-86-30.ap.ngrok.io/webhook and verify with the random string from **VERIFY_TOKEN**
 
 ### Instruction for query product details
-To query product details, user can type "/<Query-Type> <Product-ID/SKU>", for instance, "/desc ". The following is the list of query types:
+To query product details, user can type "/`Query Type` `Product ID/SKU`", for instance, "/desc ". The following is the list of query types:
 * desc
 * price
 * shipping
