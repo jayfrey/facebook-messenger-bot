@@ -23,35 +23,36 @@ module.exports = class MessengeHandler {
 
     const pageOwnerDetails = await GraphApi.getPageOwnerDetaiils();
 
+    const category = product.category
+      .reduce((arr, category) => {
+        arr.push(category.name);
+        return arr;
+      }, [])
+      .join(", ");
+
+    const templateVariables = JSON.stringify({
+      customer_name: this.user.name,
+      product_image: product.image,
+      product_name: product.name,
+      product_price: product.price,
+      product_shipping: product.shipping,
+      product_description: product.description,
+      product_type: product.type,
+      product_category: category,
+      product_manufacturer: product.manufacturer,
+      product_model: product.model,
+    });
+
+    let content = {
+      from: mailgunConfig.defaultEmail,
+      subject: "Process Customer Order",
+      template: "process_order",
+      variables: templateVariables,
+    };
+
     pageOwnerDetails.emails.forEach((email) => {
-      const category = product.category
-        .reduce((arr, category) => {
-          arr.push(category.name);
-          return arr;
-        }, [])
-        .join(", ");
-
-      let templateVariables = JSON.stringify({
-        customer_name: this.user.name,
-        product_image: product.image,
-        product_name: product.name,
-        product_price: product.price,
-        product_shipping: product.shipping,
-        product_description: product.description,
-        product_type: product.type,
-        product_category: category,
-        product_manufacturer: product.manufacturer,
-        product_model: product.model,
-      });
-
-      const content = {
-        from: mailgunConfig.defaultEmail,
-        to: email,
-        subject: "Process Customer Order",
-        template: "process_order",
-        variables: templateVariables,
-      };
-
+      content["to"] = email;
+      console.log("content: ", content);
       const mailer = new Mailer();
       mailer.send(content);
     });

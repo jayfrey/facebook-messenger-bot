@@ -22,7 +22,6 @@ module.exports = class GraphApi {
       access_token: fbConfig.pageAccesToken,
     });
     console.warn("Request body is\n" + JSON.stringify(requestBody));
-    console.warn("Request body is\n" + JSON.stringify(requestBody));
     let response = await fetch(url, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
